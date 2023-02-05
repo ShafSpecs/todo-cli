@@ -1,13 +1,34 @@
+mod cmd;
 mod structs;
+mod db;
 
-use structs::todo;
+use clap::{Parser, Subcommand};
 
-fn main() {
-    println!("Hello, world!");
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about)]
+struct Command {
+    #[command(subcommand)]
+    command: Commands,
 }
 
-fn create_new_todo() -> todo::Todo {
-    let todo = todo::Todo::new("Hello World");
+#[derive(Subcommand, Debug)]
+enum Commands {
+    /// Add a new todo
+    Add { todo: String },
 
-    todo
+    /// List todos
+    List
+}
+
+fn main() {
+    let input = Command::parse();
+
+    match &input.command {
+        Commands::Add { todo } => {
+            println!("Toto {:?}", todo)
+        },
+        Commands::List => {
+            println!("All lists")
+        }
+    };
 }
