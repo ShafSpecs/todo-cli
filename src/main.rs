@@ -3,6 +3,7 @@ mod structs;
 mod db;
 
 use clap::{Parser, Subcommand};
+use cmd::create;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about)]
@@ -14,7 +15,7 @@ struct Command {
 #[derive(Subcommand, Debug)]
 enum Commands {
     /// Add a new todo
-    Add { todo: String },
+    Add { todo: Vec<String> },
 
     /// List todos
     List
@@ -25,7 +26,7 @@ fn main() {
 
     match &input.command {
         Commands::Add { todo } => {
-            println!("Toto {:?}", todo)
+            create::create_todo(todo.join(" "))
         },
         Commands::List => {
             println!("All lists")
