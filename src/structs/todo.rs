@@ -5,11 +5,11 @@ pub struct Todo {
 
 impl Todo {
     pub fn new(todo: &str) -> Todo {
-        Todo { key: "".to_string(), todo: String::from(todo) }
+        Todo { key: "key".to_string(), todo: String::from(todo) }
     }
 
-    pub fn get(key: String) -> Todo {
-      Todo { key, todo: String::new() }
+    pub fn get_todo(self) -> String {
+      self.todo
     }
 
     pub fn edit(key: String, todo: &str) -> Todo {
